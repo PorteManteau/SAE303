@@ -42,35 +42,40 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
 
-            function updateChart(disasterType) {
+            function updateChart(disasterType, label) {
                 let labels = Object.keys(disasterData[disasterType]);
                 let data = Object.values(disasterData[disasterType]);
 
                 chart.data.labels = labels;
                 chart.data.datasets[0].data = data;
-                chart.data.datasets[0].label = disasterType;
+                chart.data.datasets[0].label = label;
                 chart.update();
             }
 
             document.getElementById('btnall').addEventListener('click', function() {
-                i 
-                updateChart('All disasters');
+                i = 0;
+                updateChart('All disasters', catastrophes[i]);
             });
 
             document.getElementById('btnino').addEventListener('click', function() {
-                updateChart('Flood');
+                i = 3
+                updateChart('Flood', catastrophes[i]);
             });
 
             document.getElementById('btnfeu').addEventListener('click', function() {
-                updateChart('Wildfire');
+                i = 7;
+                updateChart('Wildfire', catastrophes[i]);
+                
             });
 
             document.getElementById('btntre').addEventListener('click', function() {
-                updateChart('Earthquake');
+                i = 1;
+                updateChart('Earthquake', catastrophes[i]);
             });
 
             document.getElementById('btnsec').addEventListener('click', function() {
-                updateChart('Drought');
+                i = 2;
+                updateChart('Drought', catastrophes[i]);
             });
 
             updateChart('All disasters');
