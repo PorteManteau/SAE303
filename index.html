@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SAE 303 | Datalogy</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
 </head>
 
@@ -30,7 +32,8 @@
         <div class="columns">
             <div class="column is-two-thirds" width="100%">
                 <canvas id="chart"></canvas>
-                <div class="slider">
+                <div id="slider-wrapper">
+                    <input id="slider" type="range" min="1900" max="2000" style="width: 100%">
                     <!-- https://www.youtube.com/watch?v=0UteM86w0Mw&t=880s -->
                 </div>
                 <div class="is-flex is-justify-content-space-around mt-4">
@@ -41,7 +44,10 @@
                     <button id="btnsec" class="button">Chaleur extême</button>
                 </div>
             </div>
-            <img class="column" src=""/>
+            <div class="column is-flex is-flex-direction-column is-align-items-center">
+                <img id="image" src="" style="width: 80%;"/>
+                <p id="display"></p>
+            </div>
         </div>
 
         <div class="content">
