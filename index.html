@@ -34,7 +34,6 @@
                 <canvas id="chart"></canvas>
                 <div id="slider-wrapper">
                     <input id="slider" type="range" min="1900" max="2000" style="width: 100%">
-                    <!-- https://www.youtube.com/watch?v=0UteM86w0Mw&t=880s -->
                 </div>
                 <div class="is-flex is-justify-content-space-around mt-4">
                     <button id="btnall" class="button">Toutes les catastrophes</button>
@@ -45,7 +44,8 @@
                 </div>
             </div>
             <div class="column is-flex is-flex-direction-column is-align-items-center">
-                <img id="image" src="" style="width: 80%;"/>
+                <img id="image" src="" style="width: 80%; display: none;"/>
+                <div id="big-display" style="font-size: 10rem;"></div>
                 <p id="display"></p>
             </div>
         </div>
@@ -61,6 +61,7 @@
                 conduire à des conclusions erronées lors de l'analyse des tendances historiques.
             </p>
         </div>  
+        <p>Karina Kervadec, Harena Ramasindraibe, Nuno Enes Le Touzic - MMI 2A1 - 01/2025</p>
     </div>
 </body>
 <script src="script.js"></script>
