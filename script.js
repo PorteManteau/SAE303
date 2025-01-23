@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     fetch('number-of-natural-disaster-events.csv')
         .then(response => response.text())
         .then(csvText => {
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
             let lastValue = labels[labels.length - 1];
 
             let ctx = document.getElementById('chart');
-            
+
             let chart = new Chart(ctx, {
                 type: 'line',
                 data: {
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     datasets: [{
                         label: catastrophes[i],
                         data: data,
-                        pointRadius : 0,
+                        pointRadius: 0,
                         backgroundColor: 'rgba(0, 0, 0, 0)',
                         borderColor: disasterColors[i], // Couleur du graphique
                         borderWidth: 2
@@ -47,8 +47,19 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             let image = document.getElementById('image');
+            let image1 = document.getElementById('image1');
+            let image2 = document.getElementById('image2');
             let slider = document.getElementById('slider');
             let display = document.getElementById('display');
+
+            // Select the dropdown trigger button
+            const dropdownTrigger = document.querySelector('.dropdown-trigger button');
+
+            // Add a click event listener
+            dropdownTrigger.addEventListener('click', () => {
+                const dropdown = document.querySelector('.dropdown');
+                dropdown.classList.toggle('is-active'); // Toggle the 'is-active' class
+            });
 
             // Fonction pour changer la couleur de la partie avant du slider et du curseur
             function updateSliderColor(color) {
@@ -69,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Initialisation du slider avec la valeur minimale
             slider.value = slider.min;  // Réinitialiser la valeur du slider
-            slider.addEventListener('input', function() {
+            slider.addEventListener('input', function () {
 
                 let annee = slider.value;
                 let data = disasterData[disaster][annee];
@@ -79,39 +90,39 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
 
                 display.textContent = catastrophes[i] + " : " + data + " en " + annee;
-                
-                
+
+
                 let maxData = Math.max(...Object.values(disasterData[disaster]));
                 let minData = Math.min(...Object.values(disasterData[disaster]));
                 console.log(`Highest: ${maxData}, Lowest: ${minData}`);
-                
+
                 let range = maxData - minData;
                 let quarter = Math.floor((data - minData) / (range / 4));
-                console.log("Data: "+data);
+                console.log("Data: " + data);
                 console.log(`Quarter: ${quarter}`);
-                
-                if(i==0){
+
+                if (i == 0) {
                     document.getElementById('big-display').innerText = data;
                 }
 
-                else{
+                else {
                     switch (quarter) {
                         case 0:
-                            image.src = "LEGO/"+disasters[i]+"/1.png";
+                            image.src = "LEGO/" + disasters[i] + "/1.png";
                             break;
                         case 1:
-                            image.src = "LEGO/"+disasters[i]+"/2.png";
+                            image.src = "LEGO/" + disasters[i] + "/2.png";
                             break;
                         case 2:
-                            image.src = "LEGO/"+disasters[i]+"/3.png";
+                            image.src = "LEGO/" + disasters[i] + "/3.png";
                             break;
                         case 3:
-                            image.src = "LEGO/"+disasters[i]+"/4.png";
+                            image.src = "LEGO/" + disasters[i] + "/4.png";
                             break;
                         default:
                     }
                 }
-            
+
                 // Met à jour la couleur du slider et du curseur chaque fois que la valeur change
                 updateSliderColor(disasterColors[i]);
             });
@@ -135,64 +146,87 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             // Boutons de sélection de catastrophes
-            document.getElementById('btnall').addEventListener('click', function() {
-                i = 0;
-                disaster = disasters[i];
-                updateChart('All disasters', catastrophes[i], disasterColors[i]);
-                slider.value = slider.min;  // Réinitialiser la valeur du slider
-                image.style.display = "none";
-                document.getElementById('big-display').innerText = disasterData[disaster][slider.value];
-                
+
+            document.querySelectorAll('.btnall').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    i = 0;
+                    disaster = disasters[i];
+                    updateChart('All disasters', catastrophes[i], disasterColors[i]);
+                    slider.value = slider.min;  // Réinitialiser la valeur du slider
+                    image.style.display = "none";
+                    image1.src = "images/Earthquake/1.png";
+                    image2.src = "images/Earthquake/2.png";
+                    document.getElementById('big-display').innerText = disasterData[disaster][slider.value];
+                });
             });
 
-            document.getElementById('btnino').addEventListener('click', function() {
-                i = 3;
-                disaster = disasters[i];
-                updateChart('Flood', catastrophes[i], disasterColors[i]);
-                slider.value = slider.min;  // Réinitialiser la valeur du slider
-                image.src = "LEGO/"+disasters[i]+"/1.png";  // Afficher la première image
-                image.style.display = "block";
-                document.getElementById('big-display').innerText = "";
-                display.textContent = catastrophes[i] + " : " + disasterData[disaster][slider.value] + " en " + slider.value;
-                
+
+            document.querySelectorAll('.btnino').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    i = 3;
+                    disaster = disasters[i];
+                    updateChart('Flood', catastrophes[i], disasterColors[i]);
+                    slider.value = slider.min;  // Réinitialiser la valeur du slider
+                    image.src = "LEGO/" + disasters[i] + "/1.png";  // Afficher la première image
+                    image.style.display = "block";
+                    image1.src = "images/" + disasters[i] + "/1.png";
+                    image2.src = "images/" + disasters[i] + "/2.png";
+                    document.getElementById('big-display').innerText = "";
+                    display.textContent = catastrophes[i] + " : " + disasterData[disaster][slider.value] + " en " + slider.value;
+                });
             });
 
-            document.getElementById('btnfeu').addEventListener('click', function() {
-                i = 7;
-                disaster = disasters[i];
-                updateChart('Wildfire', catastrophes[i], disasterColors[i]);
-                slider.value = slider.min;  // Réinitialiser la valeur du slider
-                image.src = "LEGO/"+disasters[i]+"/1.png";  // Afficher la première image
-                image.style.display = "block";
-                document.getElementById('big-display').innerText = "";
-                display.textContent = catastrophes[i] + " : " + disasterData[disaster][slider.value] + " en " + slider.value;
+            document.querySelectorAll('.btnfeu').forEach(btn => {
+                btn.addEventListener('click', function () {
 
+                    i = 7;
+                    disaster = disasters[i];
+                    updateChart('Wildfire', catastrophes[i], disasterColors[i]);
+                    slider.value = slider.min;  // Réinitialiser la valeur du slider
+                    image.src = "LEGO/" + disasters[i] + "/1.png";  // Afficher la première image
+                    image.style.display = "block";
+                    image1.src = "images/" + disasters[i] + "/1.png";
+                    image2.src = "images/" + disasters[i] + "/2.png";
+                    document.getElementById('big-display').innerText = "";
+                    display.textContent = catastrophes[i] + " : " + disasterData[disaster][slider.value] + " en " + slider.value;
+                });
             });
 
-            document.getElementById('btntre').addEventListener('click', function() {
-                i = 1;
-                disaster = disasters[i];
-                updateChart('Earthquake', catastrophes[i], disasterColors[i]);
-                slider.value = slider.min;  // Réinitialiser la valeur du slider
-                image.src = "LEGO/"+disasters[i]+"/1.png";  // Afficher la première image
-                image.style.display = "block";
-                document.getElementById('big-display').innerText = "";
-                display.textContent = catastrophes[i] + " : " + disasterData[disaster][slider.value] + " en " + slider.value;
 
+            document.querySelectorAll('.btntre').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    i = 1;
+                    disaster = disasters[i];
+                    updateChart('Earthquake', catastrophes[i], disasterColors[i]);
+                    slider.value = slider.min;  // Réinitialiser la valeur du slider
+                    image.src = "LEGO/" + disasters[i] + "/1.png";  // Afficher la première image
+                    image.style.display = "block";
+                    image1.src = "images/" + disasters[i] + "/1.png";
+                    image2.src = "images/" + disasters[i] + "/2.png";
+                    document.getElementById('big-display').innerText = "";
+                    display.textContent = catastrophes[i] + " : " + disasterData[disaster][slider.value] + " en " + slider.value;
+
+                });
             });
 
-            document.getElementById('btnsec').addEventListener('click', function() {
-                i = 2;
-                disaster = disasters[i];
-                console.log(disaster);
-                updateChart('Extreme temperature', catastrophes[i], disasterColors[i]);
-                slider.value = slider.min;  // Réinitialiser la valeur du slider
-                image.src = "LEGO/"+disasters[i]+"/1.png";  // Afficher la première image
-                image.style.display = "block";
-                document.getElementById('big-display').innerText = "";
-                display.textContent = catastrophes[i] + " : " + disasterData[disaster][slider.value] + " en " + slider.value;
 
+            document.querySelectorAll('.btnsec').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    i = 2;
+                    disaster = disasters[i];
+                    console.log(disaster);
+                    updateChart('Extreme temperature', catastrophes[i], disasterColors[i]);
+                    slider.value = slider.min;  // Réinitialiser la valeur du slider
+                    image.src = "LEGO/" + disasters[i] + "/1.png";  // Afficher la première image
+                    image.style.display = "block";
+                    image1.src = "images/" + disasters[i] + "/1.png";
+                    image2.src = "images/" + disasters[i] + "/2.png";
+                    document.getElementById('big-display').innerText = "";
+                    display.textContent = catastrophes[i] + " : " + disasterData[disaster][slider.value] + " en " + slider.value;
+
+                });
             });
+
 
             // Initialisation du graphique avec la première catastrophe et mise à jour de la couleur du slider et du curseur
             updateChart('All disasters', catastrophes[i], disasterColors[i]);

@@ -10,58 +10,95 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
 </head>
 
-<body>
-    <div class="mx-6">
-        <nav class="navbar is-justify-content-center" role="navigation" aria-label="main navigation">
-            <a class="navbar-item">
-                SAE 303 | Datalogy
-            </a>
-        </nav>
-        <div class="content">
-            <h1>Nature en mutation : l’évolution des catastrophes naturelles</h1>
-            <p>
-                Chaque année, des séismes et des tempêtes tuent environ 40 000 à
-                50 000 personnes. Bien que ce chiffre ne représente qu’une petite
-                portion des décès sur Terre, les catastrophes naturelles peuvent
-                avoir un impact plus important sur des populations spécifiques.
-            </p>
-        </div>
+<body class="mx-3">
 
-        <div class="columns">
-            <div class="column is-two-thirds" width="100%">
-                <canvas id="chart"></canvas>
-                <div id="slider-wrapper">
-                    <input id="slider" type="range" min="1900" max="2000" style="width: 100%">
+    <nav class="navbar is-justify-content-center" role="navigation" aria-label="main navigation">
+        <a class="navbar-item">
+            SAE 303 | Datalogy
+        </a>
+    </nav>
+    <div class="content">
+        <h1>Nature en mutation : l’évolution des catastrophes naturelles</h1>
+        <p>
+            Chaque année, des séismes et des tempêtes tuent environ 40 000 à
+            50 000 personnes. Bien que ce chiffre ne représente qu’une petite
+            portion des décès sur Terre, les catastrophes naturelles peuvent
+            avoir un impact plus important sur des populations spécifiques.
+        </p>
+    </div>
+
+    <div class="columns">
+        <div class="column is-two-thirds" width="100%">
+            <canvas id="chart"></canvas>
+            <div id="slider-wrapper">
+                <input id="slider" type="range" min="1900" max="2000" style="width: 100%">
+            </div>
+
+            <div class="is-flex is-justify-content-space-around mt-4 is-hidden-mobile">
+                <button class="btnall button">Toutes les catastrophes</button>
+                <button class="btnino button">Inondations</button>
+                <button class="btnfeu button">Feu de forêt</button>
+                <button class="btntre button">Tremblement de terre</button>
+                <button class="btnsec button">Chaleur extrême</button>
+            </div>
+
+            <div class="dropdown is-hidden-tablet mt-4">
+                <div class="dropdown-trigger">
+                    <button class="button" >
+                        <span>Catégories</span>
+                        <span class="icon is-small">
+                            <i class="fas fa-angle-down"></i>
+                        </span>
+                    </button>
                 </div>
-                <div class="is-flex is-justify-content-space-around mt-4">
-                    <button id="btnall" class="button">Toutes les catastrophes</button>
-                    <button id="btnino" class="button">Inondations</button>
-                    <button id="btnfeu" class="button">Feu de forêt</button>
-                    <button id="btntre" class="button">Tremblement de terre</button>
-                    <button id="btnsec" class="button">Chaleur extême</button>
+                <div class="dropdown-menu">
+                    <div class="dropdown-content">
+                        <div class="btnall dropdown-item">Toutes les catastrophes</div>
+                        <div class="btnino dropdown-item">Inondations</div>
+                        <div class="btnfeu dropdown-item">Feu de forêt</div>
+                        <div class="btntre dropdown-item">Tremblement de terre</div>
+                        <div class="btnsec dropdown-item">Chaleur extrême</div>
+                    </div>
                 </div>
             </div>
-            <div class="column is-flex is-flex-direction-column is-align-items-center">
-                <img id="image" src="" style="width: 80%; display: none;"/>
-                <div id="big-display" style="font-size: 10rem;"></div>
-                <p id="display"></p>
-            </div>
-        </div>
 
-        <div class="content">
-            <p>
-                A noter que ces chiffres reflètent en grande partie l'augmentation du nombre de données communiquées.
-                Mais
-                aucune base de données sur les catastrophes n'est parfaite car les données sont incomplètes et leur
-                qualité
-                évolue dans le temps. Certains événements ne sont pas signalés ou sont difficiles à quantifier, ce qui
-                peut
-                conduire à des conclusions erronées lors de l'analyse des tendances historiques.
-            </p>
-        </div>  
-        <p>Karina Kervadec, Harena Ramasindraibe, Nuno Enes Le Touzic - MMI 2A1 - 01/2025</p>
+
+        </div>
+        <div class="column is-flex is-flex-direction-column is-align-items-center">
+            <img id="image" src="" style="width: 80%; display: none;" />
+            <div id="big-display" style="font-size: 10rem;"></div>
+            <p id="display"></p>
+        </div>
+    </div>
+
+
+    <div class="content">
+        <p>
+            A noter que ces chiffres reflètent en grande partie l'augmentation du nombre de données communiquées.
+            Mais
+            aucune base de données sur les catastrophes n'est parfaite car les données sont incomplètes et leur
+            qualité
+            évolue dans le temps. Certains événements ne sont pas signalés ou sont difficiles à quantifier, ce qui
+            peut
+            conduire à des conclusions erronées lors de l'analyse des tendances historiques.
+        </p>
+    </div>
+    <div class="columns">
+        <div class="column is-two-thirds">
+            <img id="image1" src="images/Earthquake/1.png">
+        </div>
+        <div class="column is-one-third is-flex is-flex-direction-column">
+            <img id="image2" src="images/Earthquake/2.png">
+            <a class="button is-large is-danger mt-4"
+                href="https://ifi.fondationdefrance.org/choisissez-votre-cause/prevenir-et-agir-face-aux-catastrophes">Faites
+                des dons</a>
+        </div>
+    </div>
+    <p>Karina Kervadec, Harena Ramasindraibe, Nuno Enes Le Touzic - MMI 2A1 - 01/2025</p>
     </div>
 </body>
 <script src="script.js"></script>
